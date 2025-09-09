@@ -40,6 +40,23 @@ public final class Utils {
     return fnvhash64(val);
   }
 
+  /**
+   * Get a random number generator.
+   * @return A ThreadLocalRandom instance for thread-safe random number generation.
+   */
+  public static ThreadLocalRandom random() {
+    return ThreadLocalRandom.current();
+  }
+
+  /**
+   * 64 bit FNV hash (uppercase version for compatibility).
+   * @param val The value to hash.
+   * @return The hash value
+   */
+  public static long FNVhash64(long val) {
+    return fnvhash64(val);
+  }
+
   public static final long FNV_OFFSET_BASIS_64 = 0xCBF29CE484222325L;
   public static final long FNV_PRIME_64 = 1099511628211L;
 

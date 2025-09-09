@@ -35,7 +35,7 @@ public class UniformGenerator extends Generator<String> {
   public UniformGenerator(Collection<String> values) {
     this.values = new ArrayList<>(values);
     laststring = null;
-    gen = new UniformLongGenerator(0, values.size() - 1);
+    gen = new UniformLongGenerator(0L, (long)(values.size() - 1));
   }
 
   /**

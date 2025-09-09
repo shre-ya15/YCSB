@@ -454,10 +454,10 @@ public class TimeSeriesWorkload extends Workload {
   
   /** The maximum number of interval offsets from the starting timestamp. Calculated
    * based on the number of records configured for the run. */
-  protected int maxOffsets;
+  protected long maxOffsets;
   
   /** The number of records or operations to perform for this run. */
-  protected int recordcount;
+  protected long recordcount;
   
   /** The number of tag pairs per time series. */
   protected int tagPairs;
@@ -545,10 +545,10 @@ public class TimeSeriesWorkload extends Workload {
   public void init(final Properties p) throws WorkloadException {
     properties = p;
     recordcount =
-        Integer.parseInt(p.getProperty(Client.RECORD_COUNT_PROPERTY, 
+        Long.parseLong(p.getProperty(Client.RECORD_COUNT_PROPERTY, 
             Client.DEFAULT_RECORD_COUNT));
     if (recordcount == 0) {
-      recordcount = Integer.MAX_VALUE;
+      recordcount = Long.MAX_VALUE;
     }
     timestampKey = p.getProperty(TIMESTAMP_KEY_PROPERTY, TIMESTAMP_KEY_PROPERTY_DEFAULT);
     valueKey = p.getProperty(VALUE_KEY_PROPERTY, VALUE_KEY_PROPERTY_DEFAULT);
@@ -562,7 +562,7 @@ public class TimeSeriesWorkload extends Workload {
             CoreWorkload.SCAN_LENGTH_DISTRIBUTION_PROPERTY_DEFAULT);
     
     if (scanlengthdistrib.compareTo("uniform") == 0) {
-      scanlength = new UniformLongGenerator(1, maxscanlength);
+      scanlength = new UniformLongGenerator(1L, (long)maxscanlength);
     } else if (scanlengthdistrib.compareTo("zipfian") == 0) {
       scanlength = new ZipfianGenerator(1, maxscanlength);
     } else {
@@ -589,7 +589,7 @@ public class TimeSeriesWorkload extends Workload {
         p.getProperty(CoreWorkload.REQUEST_DISTRIBUTION_PROPERTY, 
             CoreWorkload.REQUEST_DISTRIBUTION_PROPERTY_DEFAULT);
     if (requestdistrib.compareTo("uniform") == 0) {
-      keychooser = new UniformLongGenerator(0, numKeys - 1);
+      keychooser = new UniformLongGenerator(0L, (long)(numKeys - 1));
     } else if (requestdistrib.compareTo("sequential") == 0) {
       keychooser = new SequentialGenerator(0, numKeys - 1);
     } else if (requestdistrib.compareTo("zipfian") == 0) {
@@ -804,7 +804,7 @@ public class TimeSeriesWorkload extends Workload {
     // choose a random scan length
     int len = scanlength.nextValue().intValue();
     
-    int offsets = random.nextInt(maxOffsets - 1);
+    int offsets = random.nextInt((int)Math.min(maxOffsets - 1, Integer.MAX_VALUE));
     final long startTimestamp;
     if (offsets > 0) {
       startTimestamp = state.startTimestamp + state.timestampGenerator.getOffset(offsets);
@@ -850,7 +850,7 @@ public class TimeSeriesWorkload extends Workload {
     final Random random = ThreadLocalRandom.current();
     final StringBuilder buf = new StringBuilder().append(keys[random.nextInt(keys.length)]);
     
-    int offsets = random.nextInt(maxOffsets - 1);
+    int offsets = random.nextInt((int)Math.min(maxOffsets - 1, Integer.MAX_VALUE));
     final long startTimestamp;
     if (offsets > 0) {
       startTimestamp = state.startTimestamp + state.timestampGenerator.getOffset(offsets);
@@ -1143,13 +1143,13 @@ public class TimeSeriesWorkload extends Workload {
           properties.getProperty(CoreWorkload.INSERT_START_PROPERTY);
       if (startingTimestamp == null || startingTimestamp.isEmpty()) {
         timestampGenerator = randomizeTimestampOrder ? 
-            new RandomDiscreteTimestampGenerator(timestampInterval, timeUnits, maxOffsets) :
+            new RandomDiscreteTimestampGenerator(timestampInterval, timeUnits, (int)Math.min(maxOffsets, Integer.MAX_VALUE)) :
             new UnixEpochTimestampGenerator(timestampInterval, timeUnits);
       } else {
         try {
           timestampGenerator = randomizeTimestampOrder ? 
               new RandomDiscreteTimestampGenerator(timestampInterval, timeUnits, 
-                  Long.parseLong(startingTimestamp), maxOffsets) :
+                  Long.parseLong(startingTimestamp), (int)Math.min(maxOffsets, Integer.MAX_VALUE)) :
               new UnixEpochTimestampGenerator(timestampInterval, timeUnits, 
                   Long.parseLong(startingTimestamp));
         } catch (NumberFormatException nfe) {
@@ -1161,7 +1161,7 @@ public class TimeSeriesWorkload extends Workload {
       // one interval ago.
       startTimestamp = timestampGenerator.nextValue();
       // TODO - pick it
-      queryOffsetGenerator = new UniformLongGenerator(0, maxOffsets - 2);
+      queryOffsetGenerator = new UniformLongGenerator(0L, (long)(maxOffsets - 2));
     }
     
     /**

@@ -172,7 +172,7 @@ public class RestWorkload extends CoreWorkload {
       keychooser = new ExponentialGenerator(percentile, recordCount * frac);
       break;
     case "uniform":
-      keychooser = new UniformLongGenerator(0, recordCount - 1);
+      keychooser = new UniformLongGenerator(0L, (long)(recordCount - 1));
       break;
     case "zipfian":
       keychooser = new ZipfianGenerator(recordCount, zipfContant);
