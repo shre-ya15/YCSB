@@ -449,6 +449,11 @@ public class CoreWorkload extends Workload
  			ByteIterator data= new RandomByteIterator(fieldlengthgenerator.nextValue().intValue());
  			values.put(fieldkey,data);
  		}
+		
+		// Add timestamp field with current timestamp as numeric string (Long.parseLong compatible)
+		long timestamp = System.currentTimeMillis();
+		values.put("timestamp", new StringByteIterator(String.valueOf(timestamp)));
+		
 		return values;
 	}
 	HashMap<String, ByteIterator> buildUpdate() {
@@ -457,6 +462,11 @@ public class CoreWorkload extends Workload
 		String fieldname="field"+fieldchooser.nextString();
 		ByteIterator data = new RandomByteIterator(fieldlengthgenerator.nextValue().intValue());
 		values.put(fieldname,data);
+		
+		// Add current timestamp on updates as numeric string (Long.parseLong compatible)
+		long timestamp = System.currentTimeMillis();
+		values.put("timestamp", new StringByteIterator(String.valueOf(timestamp)));
+		
 		return values;
 	}
 
