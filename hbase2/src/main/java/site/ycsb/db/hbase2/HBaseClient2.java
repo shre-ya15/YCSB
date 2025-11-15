@@ -357,9 +357,11 @@ public class HBaseClient2 extends site.ycsb.DB {
     // We get back recordcount records
     FilterList filterList = new FilterList(FilterList.Operator.MUST_PASS_ALL);
 
-    s.setCaching(recordcount);
+    // Clamp record count to ensure it's always positive for both caching and page filter
+    int safeRecordCount = Math.max(1, recordcount);
+    s.setCaching(safeRecordCount);
     if (this.usePageFilter) {
-      filterList.addFilter(new PageFilter(recordcount));
+      filterList.addFilter(new PageFilter(safeRecordCount));
     }
 
     // add specified fields or else all fields

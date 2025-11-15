@@ -331,9 +331,11 @@ public class HBaseClient1 extends site.ycsb.DB {
     // HBase has no record limit. Here, assume recordcount is small enough to
     // bring back in one call.
     // We get back recordcount records
-    s.setCaching(recordcount);
+    // Clamp record count to ensure it's always positive for both caching and page filter
+    int safeRecordCount = Math.max(1, recordcount);
+    s.setCaching(safeRecordCount);
     if (this.usePageFilter) {
-      s.setFilter(new PageFilter(recordcount));
+      s.setFilter(new PageFilter(safeRecordCount));
     }
 
     // add specified fields or else all fields
