@@ -62,5 +62,19 @@ LICENSE file.
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.7.25</version>
     </dependency>
-  </dependencies>
+  
+  <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-common</artifactId>
+            <version>${hbase2.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>${hbase2.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        </dependencies>
 </project>
