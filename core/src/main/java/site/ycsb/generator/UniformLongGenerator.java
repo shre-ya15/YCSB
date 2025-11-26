@@ -42,7 +42,7 @@ public class UniformLongGenerator extends LongGenerator
 	@Override
 	public Long nextLong()
 	{
-        Long ret = Utils.random().nextLong() % _interval + _lb;
+        Long ret = Math.abs(Utils.random().nextLong()) % _interval + _lb;
 		setLastLong(ret);
 		
 		return ret;

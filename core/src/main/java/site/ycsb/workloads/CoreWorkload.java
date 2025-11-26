@@ -20,11 +20,8 @@ package site.ycsb.workloads;
 import site.ycsb.*;
 import site.ycsb.generator.*;
 import site.ycsb.measurements.Measurements;
-import org.apache.hadoop.hbase.util.Bytes;
-
 import java.io.IOException;
 import java.util.ArrayList;
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -519,9 +516,7 @@ public class CoreWorkload extends Workload {
     }
     value.put(fieldkey, data);
 
-    long currentTimestamp = System.currentTimeMillis();
-    byte[] longBytes = Bytes.toBytes(currentTimestamp);
-    value.put("event_time", new ByteArrayByteIterator(longBytes));
+
 
     return value;
   }
@@ -542,10 +537,7 @@ public class CoreWorkload extends Workload {
       }
       values.put(fieldkey, data);
     }
-    
-    long currentTimestamp = System.currentTimeMillis();
-    byte[] longBytes = Bytes.toBytes(currentTimestamp);
-    values.put("event_time", new ByteArrayByteIterator(longBytes));
+
     
 		return values;
 	}

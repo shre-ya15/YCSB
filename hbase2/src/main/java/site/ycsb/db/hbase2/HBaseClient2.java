@@ -468,6 +468,8 @@ public class HBaseClient2 extends site.ycsb.DB {
       }
       p.addColumn(columnFamilyBytes, Bytes.toBytes(entry.getKey()), value);
     }
+    // Add event_time column with current timestamp
+    p.addColumn(columnFamilyBytes, Bytes.toBytes("event_time"), Bytes.toBytes(System.currentTimeMillis()));
 
     try {
       if (clientSideBuffering) {
