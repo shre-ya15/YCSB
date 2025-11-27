@@ -469,8 +469,8 @@ public class HBaseClient2 extends site.ycsb.DB {
       p.addColumn(columnFamilyBytes, Bytes.toBytes(entry.getKey()), value);
     }
     // Add event_time column with current timestamp
-    p.addColumn(columnFamilyBytes, Bytes.toBytes("event_time"), Bytes.toBytes(System.currentTimeMillis()));
-
+    // p.addColumn(columnFamilyBytes, Bytes.toBytes("event_time"), Bytes.toBytes(System.currentTimeMillis()));
+    p.addColumn(columnFamilyBytes, Bytes.toBytes("event_time"),Bytes.toBytes(System.currentTimeMillis() - (11L * 366L * 24L * 60L * 60L * 1000L)));
     try {
       if (clientSideBuffering) {
         // removed Preconditions.checkNotNull, which throws NPE, in favor of NPE on next line
