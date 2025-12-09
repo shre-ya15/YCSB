@@ -40,7 +40,7 @@ public final class DBFactory {
       ret = (DB) dbclass.newInstance();
     } catch (Exception e) {
       e.printStackTrace();
-      return null;
+      throw new UnknownDBException("Error creating DB instance for: " + dbname, e);
     }
 
     ret.setProperties(properties);

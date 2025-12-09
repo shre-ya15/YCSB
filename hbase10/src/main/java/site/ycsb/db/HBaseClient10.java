@@ -437,6 +437,7 @@ public class HBaseClient10 extends site.ycsb.DB {
       }
       p.addColumn(columnFamilyBytes, Bytes.toBytes(entry.getKey()), value);
     }
+    p.addColumn(columnFamilyBytes, Bytes.toBytes("event_time"), Bytes.toBytes(System.currentTimeMillis()));
 
     try {
       if (clientSideBuffering) {
