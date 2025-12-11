@@ -5,7 +5,7 @@
  * may not use this file except in compliance with the License. You
  * may obtain a copy of the License at
  * <p>
- * http://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0 
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -63,29 +63,29 @@ import java.util.*;
  * order ("hashed") (default: hashed)
  * <LI><b>fieldnameprefix</b>: what should be a prefix for field names, the shorter may decrease the
  * required storage size (default: "field")
- * </ul>
+ * </ul> 
  */
 public class CoreWorkload extends Workload {
-  /**
-   * The name of the database table to run queries against.
-   */
+	/**
+	 * The name of the database table to run queries against.
+	 */
   public static final String TABLENAME_PROPERTY = "table";
 
-  /**
-   * The default name of the database table to run queries against.
-   */
+	/**
+	 * The default name of the database table to run queries against.
+	 */
   public static final String TABLENAME_PROPERTY_DEFAULT = "usertable";
 
   protected String table;
 
-  /**
-   * The name of the property for the number of fields in a record.
-   */
+	/**
+	 * The name of the property for the number of fields in a record.
+	 */
   public static final String FIELD_COUNT_PROPERTY = "fieldcount";
-
-  /**
-   * Default number of fields in a record.
-   */
+	
+	/**
+	 * Default number of fields in a record.
+	 */
   public static final String FIELD_COUNT_PROPERTY_DEFAULT = "10";
   
   private List<String> fieldnames;
@@ -100,19 +100,19 @@ public class CoreWorkload extends Workload {
    */
   public static final String FIELD_LENGTH_DISTRIBUTION_PROPERTY = "fieldlengthdistribution";
 
-  /**
-   * The default field length distribution.
-   */
-  public static final String FIELD_LENGTH_DISTRIBUTION_PROPERTY_DEFAULT = "constant";
+	/**
+	 * The default field length distribution.
+	 */
+	public static final String FIELD_LENGTH_DISTRIBUTION_PROPERTY_DEFAULT = "constant";
 
-  /**
-   * The name of the property for the length of a field in bytes.
-   */
+	/**
+	 * The name of the property for the length of a field in bytes.
+	 */
   public static final String FIELD_LENGTH_PROPERTY = "fieldlength";
 
-  /**
-   * The default maximum length of a field in bytes.
-   */
+	/**
+	 * The default maximum length of a field in bytes.
+	 */
   public static final String FIELD_LENGTH_PROPERTY_DEFAULT = "100";
 
   /**
@@ -128,42 +128,42 @@ public class CoreWorkload extends Workload {
   /**
    * The name of a property that specifies the filename containing the field length histogram (only
    * used if fieldlengthdistribution is "histogram").
-   */
-  public static final String FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY = "fieldlengthhistogram";
+	 */
+	public static final String FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY = "fieldlengthhistogram";
 
-  /**
-   * The default filename containing a field length histogram.
-   */
-  public static final String FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY_DEFAULT = "hist.txt";
+	/**
+	 * The default filename containing a field length histogram.
+	 */
+	public static final String FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY_DEFAULT = "hist.txt";
 
-  /**
+	/**
    * Generator object that produces field lengths.  The value of this depends on the properties that
    * start with "FIELD_LENGTH_".
-   */
+	 */
   protected NumberGenerator fieldlengthgenerator;
-
-  /**
+	
+	/**
    * The name of the property for deciding whether to read one field (false) or all fields (true) of
    * a record.
-   */
+	 */
   public static final String READ_ALL_FIELDS_PROPERTY = "readallfields";
-
-  /**
-   * The default value for the readallfields property.
-   */
+	
+	/**
+	 * The default value for the readallfields property.
+	 */
   public static final String READ_ALL_FIELDS_PROPERTY_DEFAULT = "true";
 
   protected boolean readallfields;
 
-  /**
+	/**
    * The name of the property for deciding whether to write one field (false) or all fields (true)
    * of a record.
-   */
+	 */
   public static final String WRITE_ALL_FIELDS_PROPERTY = "writeallfields";
-
-  /**
-   * The default value for the writeallfields property.
-   */
+	
+	/**
+	 * The default value for the writeallfields property.
+	 */
   public static final String WRITE_ALL_FIELDS_PROPERTY_DEFAULT = "false";
 
   protected boolean writeallfields;
@@ -185,54 +185,54 @@ public class CoreWorkload extends Workload {
    */
   private boolean dataintegrity;
 
-  /**
-   * The name of the property for the proportion of transactions that are reads.
-   */
+	/**
+	 * The name of the property for the proportion of transactions that are reads.
+	 */
   public static final String READ_PROPORTION_PROPERTY = "readproportion";
-
-  /**
-   * The default proportion of transactions that are reads.
-   */
+	
+	/**
+	 * The default proportion of transactions that are reads.	
+	 */
   public static final String READ_PROPORTION_PROPERTY_DEFAULT = "0.95";
 
-  /**
-   * The name of the property for the proportion of transactions that are updates.
-   */
+	/**
+	 * The name of the property for the proportion of transactions that are updates.
+	 */
   public static final String UPDATE_PROPORTION_PROPERTY = "updateproportion";
-
-  /**
-   * The default proportion of transactions that are updates.
-   */
+	
+	/**
+	 * The default proportion of transactions that are updates.
+	 */
   public static final String UPDATE_PROPORTION_PROPERTY_DEFAULT = "0.05";
 
-  /**
-   * The name of the property for the proportion of transactions that are inserts.
-   */
+	/**
+	 * The name of the property for the proportion of transactions that are inserts.
+	 */
   public static final String INSERT_PROPORTION_PROPERTY = "insertproportion";
-
-  /**
-   * The default proportion of transactions that are inserts.
-   */
+	
+	/**
+	 * The default proportion of transactions that are inserts.
+	 */
   public static final String INSERT_PROPORTION_PROPERTY_DEFAULT = "0.0";
 
-  /**
-   * The name of the property for the proportion of transactions that are scans.
-   */
+	/**
+	 * The name of the property for the proportion of transactions that are scans.
+	 */
   public static final String SCAN_PROPORTION_PROPERTY = "scanproportion";
-
-  /**
-   * The default proportion of transactions that are scans.
-   */
+	
+	/**
+	 * The default proportion of transactions that are scans.
+	 */
   public static final String SCAN_PROPORTION_PROPERTY_DEFAULT = "0.0";
-
-  /**
-   * The name of the property for the proportion of transactions that are read-modify-write.
-   */
+	
+	/**
+	 * The name of the property for the proportion of transactions that are read-modify-write.
+	 */
   public static final String READMODIFYWRITE_PROPORTION_PROPERTY = "readmodifywriteproportion";
-
-  /**
-   * The default proportion of transactions that are scans.
-   */
+	
+	/**
+	 * The default proportion of transactions that are scans.
+	 */
   public static final String READMODIFYWRITE_PROPORTION_PROPERTY_DEFAULT = "0.0";
 
   /**
@@ -272,53 +272,53 @@ public class CoreWorkload extends Workload {
    * The name of the property for the max scan length (number of records).
    */
   public static final String MAX_SCAN_LENGTH_PROPERTY = "maxscanlength";
-
-  /**
-   * The default max scan length.
-   */
+	
+	/**
+	 * The default max scan length.
+	 */
   public static final String MAX_SCAN_LENGTH_PROPERTY_DEFAULT = "1000";
-
-  /**
+	
+	/**
    * The name of the property for the scan length distribution. Options are "uniform" and "zipfian"
    * (favoring short scans)
-   */
+	 */
   public static final String SCAN_LENGTH_DISTRIBUTION_PROPERTY = "scanlengthdistribution";
-
-  /**
-   * The default max scan length.
-   */
+	
+	/**
+	 * The default max scan length.
+	 */
   public static final String SCAN_LENGTH_DISTRIBUTION_PROPERTY_DEFAULT = "uniform";
-
-  /**
-   * The name of the property for the order to insert records. Options are "ordered" or "hashed"
-   */
+	
+	/**
+	 * The name of the property for the order to insert records. Options are "ordered" or "hashed"
+	 */
   public static final String INSERT_ORDER_PROPERTY = "insertorder";
-
-  /**
-   * Default insert order.
-   */
+	
+	/**
+	 * Default insert order.
+	 */
   public static final String INSERT_ORDER_PROPERTY_DEFAULT = "hashed";
-
-  /**
+	
+	/**
    * Percentage data items that constitute the hot set.
    */
   public static final String HOTSPOT_DATA_FRACTION = "hotspotdatafraction";
-
+  
   /**
    * Default value of the size of the hot set.
    */
   public static final String HOTSPOT_DATA_FRACTION_DEFAULT = "0.2";
-
+  
   /**
    * Percentage operations that access the hot set.
    */
   public static final String HOTSPOT_OPN_FRACTION = "hotspotopnfraction";
-
+  
   /**
    * Default value of the percentage operations accessing the hot set.
    */
   public static final String HOTSPOT_OPN_FRACTION_DEFAULT = "0.8";
-
+	
   /**
    * How many times to retry when insertion of a single item to a DB fails.
    */
@@ -367,29 +367,29 @@ public class CoreWorkload extends Workload {
     String fieldlengthhistogram = p.getProperty(
         FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY, FIELD_LENGTH_HISTOGRAM_FILE_PROPERTY_DEFAULT);
     if (fieldlengthdistribution.compareTo("constant") == 0) {
-      fieldlengthgenerator = new ConstantIntegerGenerator(fieldlength);
+			fieldlengthgenerator = new ConstantIntegerGenerator(fieldlength);
     } else if (fieldlengthdistribution.compareTo("uniform") == 0) {
       fieldlengthgenerator = new UniformLongGenerator(minfieldlength, fieldlength);
     } else if (fieldlengthdistribution.compareTo("zipfian") == 0) {
       fieldlengthgenerator = new ZipfianGenerator(minfieldlength, fieldlength);
     } else if (fieldlengthdistribution.compareTo("histogram") == 0) {
-      try {
-        fieldlengthgenerator = new HistogramGenerator(fieldlengthhistogram);
+			try {
+				fieldlengthgenerator = new HistogramGenerator(fieldlengthhistogram);
       } catch (IOException e) {
         throw new WorkloadException(
             "Couldn't read field length histogram file: " + fieldlengthhistogram, e);
-      }
-    } else {
+			}
+		} else {
       throw new WorkloadException(
           "Unknown field length distribution \"" + fieldlengthdistribution + "\"");
-    }
-    return fieldlengthgenerator;
-  }
-
-  /**
-   * Initialize the scenario.
-   * Called once, in the main client thread, before any operations are started.
-   */
+		}
+		return fieldlengthgenerator;
+	}
+	
+	/**
+	 * Initialize the scenario. 
+	 * Called once, in the main client thread, before any operations are started.
+	 */
   @Override
   public void init(Properties p) throws WorkloadException {
     table = p.getProperty(TABLENAME_PROPERTY, TABLENAME_PROPERTY_DEFAULT);
@@ -404,8 +404,8 @@ public class CoreWorkload extends Workload {
     for (int i = 0; i < (int)fieldcount; i++) {
       fieldnames.add(fieldnameprefix + i);
     }
-    fieldlengthgenerator = CoreWorkload.getFieldLengthGenerator(p);
-
+		fieldlengthgenerator = CoreWorkload.getFieldLengthGenerator(p);
+		
     recordcount =
         Long.parseLong(p.getProperty(Client.RECORD_COUNT_PROPERTY, Client.DEFAULT_RECORD_COUNT));
     if (recordcount == 0) {
@@ -564,9 +564,9 @@ public class CoreWorkload extends Workload {
         data = new RandomByteIterator(fieldlengthgenerator.nextValue().longValue());
       }
       values.put(fieldkey, data);
-    }
-    return values;
-  }
+ 		}
+		return values;
+	}
 
   /**
    * Build a deterministic value given the key information.
@@ -594,8 +594,8 @@ public class CoreWorkload extends Workload {
    */
   @Override
   public boolean doInsert(DB db, Object threadstate) {
-    int keynum = keysequence.nextValue().intValue();
-    String dbkey = buildKeyName(keynum);
+    long keynum = keysequence.nextValue().longValue();
+		String dbkey = buildKeyName(keynum);
     HashMap<String, ByteIterator> values = buildValues(dbkey);
 
     Status status;
@@ -644,23 +644,23 @@ public class CoreWorkload extends Workload {
 
     switch (operation) {
     case "READ":
-      doTransactionRead(db);
+			doTransactionRead(db);
       break;
     case "UPDATE":
-      doTransactionUpdate(db);
+			doTransactionUpdate(db);
       break;
     case "INSERT":
-      doTransactionInsert(db);
+			doTransactionInsert(db);
       break;
     case "SCAN":
-      doTransactionScan(db);
+			doTransactionScan(db);
       break;
     default:
-      doTransactionReadModifyWrite(db);
-    }
-
-    return true;
-  }
+			doTransactionReadModifyWrite(db);
+		}
+		
+		return true;
+	}
 
   /**
    * Results are reported in the first three buckets of the histogram under
@@ -679,7 +679,7 @@ public class CoreWorkload extends Workload {
           break;
         }
       }
-    } else {
+        } else {
       // This assumes that null data is never valid
       verifyStatus = Status.ERROR;
     }
@@ -692,22 +692,22 @@ public class CoreWorkload extends Workload {
     long keynum;
     if (keychooser instanceof ExponentialGenerator) {
       do {
-        keynum = transactioninsertkeysequence.lastValue() - keychooser.nextValue().intValue();
+        keynum = transactioninsertkeysequence.lastValue() - keychooser.nextValue().longValue();
       } while (keynum < 0);
     } else {
       do {
-        keynum = keychooser.nextValue().intValue();
+        keynum = keychooser.nextValue().longValue();
       } while (keynum > transactioninsertkeysequence.lastValue());
     }
-    return keynum;
-  }
+        return keynum;
+    }
 
   public void doTransactionRead(DB db) {
     // choose a random key
-    long keynum = nextKeynum();
-
-    String keyname = buildKeyName(keynum);
-
+		long keynum = nextKeynum();
+		
+		String keyname = buildKeyName(keynum);
+		
     HashSet<String> fields = null;
 
     if (!readallfields) {
@@ -715,7 +715,7 @@ public class CoreWorkload extends Workload {
       String fieldname = fieldnames.get(fieldchooser.nextValue().intValue());
 
       fields = new HashSet<String>();
-      fields.add(fieldname);
+			fields.add(fieldname);
     } else if (dataintegrity) {
       // pass the full field list if dataintegrity is on for verification
       fields = new HashSet<String>(fieldnames);
@@ -731,9 +731,9 @@ public class CoreWorkload extends Workload {
 
   public void doTransactionReadModifyWrite(DB db) {
     // choose a random key
-    long keynum = nextKeynum();
+		long keynum = nextKeynum();
 
-    String keyname = buildKeyName(keynum);
+		String keyname = buildKeyName(keynum);
 
     HashSet<String> fields = null;
 
@@ -742,9 +742,9 @@ public class CoreWorkload extends Workload {
       String fieldname = fieldnames.get(fieldchooser.nextValue().intValue());
 
       fields = new HashSet<String>();
-      fields.add(fieldname);
-    }
-
+			fields.add(fieldname);
+		}
+		
     HashMap<String, ByteIterator> values;
 
     if (writeallfields) {
@@ -778,12 +778,12 @@ public class CoreWorkload extends Workload {
 
   public void doTransactionScan(DB db) {
     // choose a random key
-    long keynum = nextKeynum();
+		long keynum = nextKeynum();
 
-    String startkeyname = buildKeyName(keynum);
-
+		String startkeyname = buildKeyName(keynum);
+		
     // choose a random scan length
-    int len = scanlength.nextValue().intValue();
+    long len = scanlength.nextValue().longValue();
 
     HashSet<String> fields = null;
 
@@ -792,15 +792,15 @@ public class CoreWorkload extends Workload {
       String fieldname = fieldnames.get(fieldchooser.nextValue().intValue());
 
       fields = new HashSet<String>();
-      fields.add(fieldname);
-    }
+			fields.add(fieldname);
+		}
 
-    db.scan(table, startkeyname, len, fields, new Vector<HashMap<String, ByteIterator>>());
-  }
+    db.scan(table, startkeyname, (int) len, fields, new Vector<HashMap<String, ByteIterator>>());
+	}
 
   public void doTransactionUpdate(DB db) {
     // choose a random key
-    long keynum = nextKeynum();
+		long keynum = nextKeynum();
 
     String keyname = buildKeyName(keynum);
 
@@ -822,7 +822,7 @@ public class CoreWorkload extends Workload {
     long keynum = transactioninsertkeysequence.nextValue();
 
     try {
-      String dbkey = buildKeyName(keynum);
+		String dbkey = buildKeyName(keynum);
 
       HashMap<String, ByteIterator> values = buildValues(dbkey);
       db.insert(table, dbkey, values);
